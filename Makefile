@@ -4,7 +4,7 @@ black:
 	pipenv run black
 
 test:
-	pipenv run pytest
+	PIPENV_DOTENV_LOCATION=.env.test pipenv run pytest
 
 run:
 	pipenv run main.py
