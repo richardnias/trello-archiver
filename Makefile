@@ -7,4 +7,4 @@ test:
 	pipenv run pytest archiver
 
 run:
-	pipenv run archiver/main.py
+	pipenv run python -m archiver

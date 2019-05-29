@@ -26,7 +26,7 @@ class SettingItem:
         self.var_name = var_name
         self.value = None
 
-    def __get__(self, instance, owner):
+    def __str__(self):
         if self.value is None:
             self.value = _get_var(self.var_name)
         return self.value
@@ -35,3 +35,4 @@ class SettingItem:
 TRELLO_API_KEY = SettingItem("TRELLO_API_KEY")
 TRELLO_TOKEN = SettingItem("TRELLO_TOKEN")
 TRELLO_DONE_LIST = SettingItem("TRELLO_DONE_LIST")
+PHONE_NUMBER = SettingItem("PHONE_NUMBER")

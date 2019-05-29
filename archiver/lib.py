@@ -27,6 +27,17 @@ def get_cards(list_id: str, key: str, token: str) -> ListStrDict:
     return response.json()
 
 
+def close_card(card_id: str, key: str, token: str):
+    url = build_url(f"/1/cards/{card_id}/closed", key, token, {"value": "true"})
+    response = requests.put(url)
+    response.raise_for_status()
+
+
+def close_cards(cards: ListStrDict, key: str, token: str):
+    for card in cards:
+        close_card(card["id"], key, token)
+
+
 def construct_message(cards: ListStrDict) -> str:
     """
     >>> print(construct_message([{'name': 'woo'}, {'name': 'yeah'}]))
