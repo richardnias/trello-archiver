@@ -1,0 +1,31 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.7.3
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+            - v1-dependencies-
+      - run:
+          name: install dependencies
+          command: |
+            sudo pip install pipenv
+            pipenv install
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "Pipfile.lock" }}
+          paths:
+            - .venv
+            - /usr/local/bin
+            - /usr/local/lib/python3.7/site-packages
+      - run:
+          name: run tests
+          command: make ci
