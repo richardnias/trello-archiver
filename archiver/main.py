@@ -1,5 +1,4 @@
 import requests
-import settings
 from typing import Dict, List
 from urllib.parse import urlencode
 
@@ -22,17 +21,17 @@ def build_url(path: str, key: str, token: str, qs: StrDict = None) -> str:
 
 
 def get_cards(list_id: str, key: str, token: str) -> ListStrDict:
-    url = build_url(f'/1/lists/{list_id}/cards', key, token, qs={'fields': 'id,name'})
+    url = build_url(f"/1/lists/{list_id}/cards", key, token, qs={"fields": "id,name"})
     response = requests.get(url)
     response.raise_for_status()
     return response.json()
 
 
 def construct_message(cards: ListStrDict) -> str:
-    message_header = 'Your weekly release 🦑:'
+    message_header = "Your weekly release 🦑:"
     lines = [f'- {card["title"]}' for card in cards]
-    message = [message_header, ''] + lines
-    return '\n'.join(message)
+    message = [message_header, ""] + lines
+    return "\n".join(message)
 
 
 def send_sms(number: str, message: str):
