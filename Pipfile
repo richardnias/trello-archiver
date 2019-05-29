@@ -7,6 +7,7 @@ verify_ssl = true
 black = "==19.3b0"
 pytest = "==4.5.0"
 v = {editable = true,version = "*"}
+pytest-cov = "==2.7.1"
 
 [packages]
 requests = "==2.22.0"
