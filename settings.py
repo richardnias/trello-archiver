@@ -1,7 +1,4 @@
-from dotenv import load_dotenv
 import os
-
-load_dotenv()
 
 TRELLO_API_KEY = os.environ['TRELLO_API_KEY']
 TRELLO_TOKEN = os.environ['TRELLO_TOKEN']
