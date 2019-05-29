@@ -6,6 +6,15 @@ class ConfigError(Exception):
 
 
 def _get_var(var_name) -> str:
+    """
+    >>> os.environ['foo'] = 'woo'
+    >>> _get_var('foo')
+    'woo'
+    >>> _get_var('boo')
+    Traceback (most recent call last):
+    ...
+    settings.ConfigError:
+    """
     try:
         return os.environ[var_name]
     except KeyError:
