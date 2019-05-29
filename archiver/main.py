@@ -28,8 +28,15 @@ def get_cards(list_id: str, key: str, token: str) -> ListStrDict:
 
 
 def construct_message(cards: ListStrDict) -> str:
+    """
+    >>> print(construct_message([{'name': 'woo'}, {'name': 'yeah'}]))
+    Your weekly release 🦑:
+    <BLANKLINE>
+    - woo
+    - yeah
+    """
     message_header = "Your weekly release 🦑:"
-    lines = [f'- {card["title"]}' for card in cards]
+    lines = [f'- {card["name"]}' for card in cards]
     message = [message_header, ""] + lines
     return "\n".join(message)
 
