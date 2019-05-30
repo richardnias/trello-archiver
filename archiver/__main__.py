@@ -1,18 +1,20 @@
-from archiver.lib import get_cards, construct_message, send_sms, close_cards
+from archiver.email import send_email
+from archiver.trello import get_cards, close_cards, construct_message
 from archiver import settings
+from datetime import datetime
 
 
 def main():
     key = settings.TRELLO_API_KEY
     token = settings.TRELLO_TOKEN
     list_id = settings.TRELLO_DONE_LIST
-    number = settings.PHONE_NUMBER
+    recipient = settings.RECIPIENT
 
     cards = get_cards(list_id, key, token)
 
     message = construct_message(cards)
 
-    send_sms(number, message)
+    send_email(recipient, f'[weekly release] {datetime.today().strftime("%d.%m.%y")}', message)
 
     close_cards(cards, key, token)
 

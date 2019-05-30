@@ -1,12 +1,11 @@
-import requests
 from typing import Dict, List
 from urllib.parse import urlencode
 
-
-StrDict = Dict[str, str]
-ListStrDict = List[StrDict]
+import requests
 
 TRELLO_URL = "https://api.trello.com"
+
+StrDict = Dict[str, str]
 
 
 def build_url(path: str, key: str, token: str, qs: StrDict = None) -> str:
@@ -18,6 +17,9 @@ def build_url(path: str, key: str, token: str, qs: StrDict = None) -> str:
     """
     full_qs = {**(qs if qs else {}), "key": key, "token": token}
     return f"{TRELLO_URL}{path}?{urlencode(full_qs)}"
+
+
+ListStrDict = List[StrDict]
 
 
 def get_cards(list_id: str, key: str, token: str) -> ListStrDict:
@@ -35,7 +37,8 @@ def close_card(card_id: str, key: str, token: str):
 
 def close_cards(cards: ListStrDict, key: str, token: str):
     for card in cards:
-        close_card(card["id"], key, token)
+        # close_card(card["id"], key, token)
+        print(f'closing card {card}')
 
 
 def construct_message(cards: ListStrDict) -> str:
@@ -50,7 +53,3 @@ def construct_message(cards: ListStrDict) -> str:
     lines = [f'- {card["name"]}' for card in cards]
     message = [message_header, ""] + lines
     return "\n".join(message)
-
-
-def send_sms(number: str, message: str):
-    pass
