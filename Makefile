@@ -1,10 +1,10 @@
 install-pipenv:
 	sudo pip install pipenv
 
-setup: have-pipenv
+setup:
 	pipenv install --dev
 
-ci: black-check test
+ci: install-pipenv setup black-check test
 
 black:
 	pipenv run black archiver

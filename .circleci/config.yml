@@ -15,9 +15,9 @@ jobs:
             - v1-dependencies-{{ checksum "Pipfile.lock" }}
             - v1-dependencies-
       - run:
-          name: install dependencies
+          name: install dependencies and run tests
           command: |
-            make install-pipenv setup
+            make ci
 
       - save_cache:
           key: v1-dependencies-{{ checksum "Pipfile.lock" }}
@@ -25,9 +25,6 @@ jobs:
             - .venv
             - /usr/local/bin
             - /usr/local/lib/python3.7/site-packages
-      - run:
-          name: run tests
-          command: make ci
 
       - store_artifacts:
           path: htmlcov
