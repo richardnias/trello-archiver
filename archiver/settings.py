@@ -1,11 +1,12 @@
 import os
+from typing import Optional
 
 
 class ConfigError(Exception):
     pass
 
 
-def _get_var(var_name) -> str:
+def _get_var(var_name: str) -> str:
     """
     >>> os.environ['foo'] = 'woo'
     >>> _get_var('foo')
@@ -35,15 +36,15 @@ class SettingItem:
 
     def __init__(self, var_name: str):
         self.var_name = var_name
-        self._value = None
+        self._value: Optional[str] = None
 
     @property
-    def value(self):
+    def value(self) -> str:
         if self._value is None:
             self._value = _get_var(self.var_name)
         return self._value
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.value
 
 

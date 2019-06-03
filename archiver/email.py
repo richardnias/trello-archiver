@@ -1,8 +1,10 @@
-import boto3
+import boto3  # type: ignore
+from botocore.client import BaseClient  # type: ignore
+
 from . import settings
 
 
-def _ses_get_client():
+def _ses_get_client() -> BaseClient:
     return boto3.client(
         "ses",
         region_name=settings.AWS_REGION_NAME.value,
@@ -11,7 +13,7 @@ def _ses_get_client():
     )
 
 
-def _ses_send_email(recipient, sender, subject, message):
+def _ses_send_email(recipient: str, sender: str, subject: str, message: str) -> None:
     client = _ses_get_client()
     client.send_email(
         Destination={"ToAddresses": [recipient]},
@@ -23,7 +25,7 @@ def _ses_send_email(recipient, sender, subject, message):
     )
 
 
-def send_email(recipient, sender, subject, message):
+def send_email(recipient: str, sender: str, subject: str, message: str) -> None:
     print(f"sending mail to {recipient}")
     print(f"Subject: {subject}")
     print(f"Message: {message}")

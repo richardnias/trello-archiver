@@ -4,10 +4,10 @@ from archiver import settings
 from datetime import datetime
 
 
-def main():
-    key = settings.TRELLO_API_KEY
-    token = settings.TRELLO_TOKEN
-    list_id = settings.TRELLO_DONE_LIST
+def main() -> None:
+    key = settings.TRELLO_API_KEY.value
+    token = settings.TRELLO_TOKEN.value
+    list_id = settings.TRELLO_DONE_LIST.value
     recipient = settings.RECIPIENT.value
     sender = settings.SENDER.value
 
