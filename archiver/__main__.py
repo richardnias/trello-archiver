@@ -14,7 +14,9 @@ def main():
 
     message = construct_message(cards)
 
-    send_email(recipient, f'[weekly release] {datetime.today().strftime("%d.%m.%y")}', message)
+    send_email(
+        recipient, f'[weekly release] {datetime.today().strftime("%d.%m.%y")}', message
+    )
 
     close_cards(cards, key, token)
 
