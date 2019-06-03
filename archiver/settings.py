@@ -22,6 +22,17 @@ def _get_var(var_name) -> str:
 
 
 class SettingItem:
+    """
+    >>> os.environ['foo'] = 'woo'
+    >>> item = SettingItem('foo')
+    >>> print(item)
+    woo
+    >>> item.value
+    'woo'
+    >>> f'{item}'
+    'woo'
+    """
+
     def __init__(self, var_name: str):
         self.var_name = var_name
         self._value = None
