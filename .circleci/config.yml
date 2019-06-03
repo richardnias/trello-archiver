@@ -56,7 +56,7 @@ workflows:
   version: 2
   build-test:
     jobs:
-      - build
+      - test
   weekly:
     triggers:
       - schedule:
