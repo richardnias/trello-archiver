@@ -17,8 +17,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            sudo pip install pipenv
-            pipenv install --dev
+            make install-pipenv setup
 
       - save_cache:
           key: v1-dependencies-{{ checksum "Pipfile.lock" }}
@@ -44,11 +43,6 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "Pipfile.lock" }}
             - v1-dependencies-
-      - run:
-          name: install dependencies
-          command: |
-            sudo pip install pipenv
-            pipenv install --dev
       - run:
           name: run
           command: make run

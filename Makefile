@@ -1,3 +1,9 @@
+install-pipenv:
+	sudo pip install pipenv
+
+setup: have-pipenv
+	pipenv install --dev
+
 ci: black-check test
 
 black:
