@@ -37,8 +37,8 @@ def close_card(card_id: str, key: str, token: str):
 
 def close_cards(cards: ListStrDict, key: str, token: str):
     for card in cards:
-        # close_card(card["id"], key, token)
         print(f"closing card {card}")
+        close_card(card["id"], key, token)
 
 
 def construct_message(cards: ListStrDict) -> str:
