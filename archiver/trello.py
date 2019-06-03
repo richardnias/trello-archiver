@@ -49,6 +49,9 @@ def construct_message(cards: ListStrDict) -> str:
     - woo
     - yeah
     """
+    if len(cards) == 0:
+        return "You did not complete any tasks this week."
+
     message_header = "Your weekly release 🦑:"
     lines = [f'- {card["name"]}' for card in cards]
     message = [message_header, ""] + lines
