@@ -24,11 +24,15 @@ def _get_var(var_name) -> str:
 class SettingItem:
     def __init__(self, var_name: str):
         self.var_name = var_name
-        self.value = None
+        self._value = None
+
+    @property
+    def value(self):
+        if self._value is None:
+            self._value = _get_var(self.var_name)
+        return self._value
 
     def __str__(self):
-        if self.value is None:
-            self.value = _get_var(self.var_name)
         return self.value
 
 
@@ -38,4 +42,4 @@ TRELLO_DONE_LIST = SettingItem("TRELLO_DONE_LIST")
 RECIPIENT = SettingItem("RECIPIENT")
 AWS_REGION_NAME = SettingItem("AWS_REGION_NAME")
 AWS_ACCESS_KEY_ID = SettingItem("AWS_ACCESS_KEY_ID")
-AWS_ACCESS_KEY_SECRET = SettingItem("AWS_ACCESS_KEY_SECRET")
+AWS_SECRET_ACCESS_KEY = SettingItem("AWS_SECRET_ACCESS_KEY")

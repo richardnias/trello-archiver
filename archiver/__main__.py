@@ -8,7 +8,7 @@ def main():
     key = settings.TRELLO_API_KEY
     token = settings.TRELLO_TOKEN
     list_id = settings.TRELLO_DONE_LIST
-    recipient = settings.RECIPIENT
+    recipient = settings.RECIPIENT.value
 
     cards = get_cards(list_id, key, token)
 

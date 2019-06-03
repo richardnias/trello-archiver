@@ -5,9 +5,9 @@ from . import settings
 def _ses_get_client():
     return boto3.client(
         'ses',
-        region_name=settings.AWS_REGION_NAME,
-        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-        aws_access_key_secret=settings.AWS_ACCESS_KEY_SECRET,
+        region_name=settings.AWS_REGION_NAME.value,
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID.value,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY.value,
     )
 
 
