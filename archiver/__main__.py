@@ -9,13 +9,17 @@ def main():
     token = settings.TRELLO_TOKEN
     list_id = settings.TRELLO_DONE_LIST
     recipient = settings.RECIPIENT.value
+    sender = settings.SENDER.value
 
     cards = get_cards(list_id, key, token)
 
     message = construct_message(cards)
 
     send_email(
-        recipient, f'[weekly release] {datetime.today().strftime("%d.%m.%y")}', message
+        recipient,
+        sender,
+        f'[weekly release] {datetime.today().strftime("%d.%m.%y")}',
+        message,
     )
 
     close_cards(cards, key, token)

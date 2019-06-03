@@ -11,7 +11,7 @@ def _ses_get_client():
     )
 
 
-def _ses_send_email(recipient, subject, message):
+def _ses_send_email(recipient, sender, subject, message):
     client = _ses_get_client()
     client.send_email(
         Destination={"ToAddresses": [recipient]},
@@ -19,12 +19,12 @@ def _ses_send_email(recipient, subject, message):
             "Body": {"Text": {"Charset": "UTF-8", "Data": message}},
             "Subject": {"Charset": "UTF-8", "Data": subject},
         },
-        Source="richardnias@gmail.com",
+        Source=sender,
     )
 
 
-def send_email(recipient, subject, message):
+def send_email(recipient, sender, subject, message):
     print(f"sending mail to {recipient}")
     print(f"Subject: {subject}")
     print(f"Message: {message}")
-    _ses_send_email(recipient, subject, message)
+    _ses_send_email(recipient, sender, subject, message)
