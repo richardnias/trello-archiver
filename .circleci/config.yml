@@ -23,8 +23,6 @@ jobs:
           key: v1-dependencies-{{ checksum "Pipfile.lock" }}
           paths:
             - .venv
-            - /usr/local/bin
-            - /usr/local/lib/python3.7/site-packages
 
       - store_artifacts:
           path: htmlcov
@@ -40,6 +38,12 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "Pipfile.lock" }}
             - v1-dependencies-
+
+      - run:
+          name: install dependencies and run tests
+          command: |
+            make ci
+
       - run:
           name: run
           command: make run
