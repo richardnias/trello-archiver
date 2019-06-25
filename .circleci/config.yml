@@ -10,20 +10,10 @@ jobs:
       - checkout
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Pipfile.lock" }}
-            - v1-dependencies-
       - run:
           name: install dependencies and run tests
           command: |
             make ci
-
-      - save_cache:
-          key: v1-dependencies-{{ checksum "Pipfile.lock" }}
-          paths:
-            - .venv
-
       - store_artifacts:
           path: htmlcov
   run:
@@ -36,16 +26,10 @@ jobs:
       - checkout
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Pipfile.lock" }}
-            - v1-dependencies-
-
       - run:
           name: install dependencies and run tests
           command: |
             make ci
-
       - run:
           name: run
           command: make run
