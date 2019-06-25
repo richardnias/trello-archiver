@@ -34,6 +34,8 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Pipfile.lock" }}
