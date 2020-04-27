@@ -20,6 +20,7 @@ jobs:
     - name: run
       run: make run
       env:
+        PIPENV_VENV_IN_PROJECT: true
         TRELLO_API_KEY: ${{ secrets.TRELLO_API_KEY }}
         TRELLO_TOKEN: ${{ secrets.TRELLO_TOKEN }}
         TRELLO_DONE_LIST: ${{ secrets.TRELLO_DONE_LIST }}
