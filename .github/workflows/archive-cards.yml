@@ -1,0 +1,30 @@
+name: Archive cards
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: install dependencies
+      run: make ci
+      env:
+        PIPENV_VENV_IN_PROJECT: true
+    - name: run
+      run: make run
+      env:
+        TRELLO_API_KEY: ${{ secrets.TRELLO_API_KEY }}
+        TRELLO_TOKEN: ${{ secrets.TRELLO_TOKEN }}
+        TRELLO_DONE_LIST: ${{ secrets.TRELLO_DONE_LIST }}
+        SENDER: ${{ secrets.SENDER }}
+        RECIPIENT: ${{ secrets.RECIPIENT }}
+        AWS_REGION_NAME: ${{ secrets.AWS_REGION_NAME }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
